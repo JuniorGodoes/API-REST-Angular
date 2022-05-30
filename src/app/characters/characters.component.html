@@ -1,0 +1,41 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav-content>
+
+    <mat-toolbar color="primary" style="height: 100px;">
+      <span style="margin-left: 60px; font-size: 50px; ">API-Marvel</span>
+    </mat-toolbar>
+
+    <!-- CHARACTERS -->
+    <div class="characters">
+      <mat-card style=" border-radius: 50px; margin-bottom: 40px;" *ngFor="let character of allCharacters">
+   
+         <mat-card-header>
+           <div mat-card-avatar class="example-header-image"></div>
+           <mat-card-title>{{ character.name }}</mat-card-title>
+           <mat-card-subtitle>{{ character.name }}</mat-card-subtitle>
+         </mat-card-header>
+      
+         <img mat-card-image style="height: 300px; width: 300px; border-radius: 50px; margin-left: 20px;" 
+         src="{{ character.thumbnail.path}}.{{ character.thumbnail.extension}}" alt="">
+      
+         <mat-card-content>
+           <ul>
+              <li *ngIf="character.series.items.length > 0 ">{{ character.series.items[0].name }}</li>
+              <li *ngIf="character.series.items.length > 1 ">{{ character.series.items[1].name }}</li>
+              <li *ngIf="character.series.items.length > 2 ">{{ character.series.items[2].name }}</li>
+              <li *ngIf="character.events.items.length > 0 ">{{ character.events.items[0].name }}</li>
+              <li *ngIf="character.events.items.length > 1 ">{{ character.events.items[1].name }}</li>
+           </ul>
+         </mat-card-content>
+      
+       </mat-card>
+   </div>
+
+    <mat-toolbar color="primary" style="height: 100px;">
+      
+      <mat-icon (click)="lastpage()" style="font-size: 40px; margin-left: 580px;">chevron_left</mat-icon>
+      <mat-icon (click)="nextpage()" style="font-size: 40px; margin-left: 50px;">chevron_right</mat-icon>
+    </mat-toolbar>
+
+  </mat-sidenav-content>
+</mat-sidenav-container>

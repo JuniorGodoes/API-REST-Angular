@@ -1,0 +1,35 @@
+#imagem {
+    height: 300px;
+    width: 300px;
+}
+#card {
+    margin-left: 100px;
+}
+
+.characters{
+    margin-left: 100px;
+    margin-right: 100px;
+    margin-bottom: 120px; 
+    margin-top: 30px;
+}
+.sidenav-container {
+    height: 100%;
+  }
+  
+  .sidenav {
+    width: 200px;
+  }
+  /* 
+  .sidenav .mat-toolbar {
+    background: inherit;
+  } */
+  
+  .mat-toolbar.mat-primary {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+  }
+  .form-control{
+      margin-left: 500px;
+      width: 300px;
+  }
