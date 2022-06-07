@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CharactersApiService } from './character/shared/characters-api.service';
-import { map, tap } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { FormControl } from '@angular/forms';
 
 @Component({
@@ -16,36 +16,60 @@ export class CharactersComponent implements OnInit {
   page: number = 1;
   queryField = new FormControl();
   results: any = 0;
+  values = '';
+  data: any = []
   
 
   constructor(private CharacterSvc: CharactersApiService) { }
   
 
   ngOnInit() {
-    this.atualizar()
-
     this.CharacterSvc.get().pipe(map((data: any) => data.data.results
-    )).subscribe(dados => console.log(dados))
+    )).subscribe(dados => {
+      for(let i=0; i < dados.length; i++){
+        this.data.push(dados[i])
+      }
+      this.update(this.data)
+    })
+
 
   }
 
-  atualizar(){
-    this.allCharacters = [];
-    for(let i=0; i < this.page * 10 ; i++){
-      if(i >= (this.page * 10) - 10){
-        this.CharacterSvc.get().pipe(map((data: any) => data.data.results[i]
-        )).subscribe(dados => this.allCharacters.push(dados))
+  onKey(event: any) { 
+    this.allCharacters = []
+    this.data = []
+    this.values = event.target.value;
+    this.page = 1
+
+    this.CharacterSvc.get().pipe(map((data: any) => data.data.results
+    )).subscribe(dados => {
+
+      for(let i=0; i < dados.length; i++){
+        let nome = dados[i].name
+        if(nome.indexOf(this.values) >= 0){
+          this.data.push(dados[i])
+        }
+      }
+      this.update(this.data)
+    })
+  }
+
+  update(array: any){
+    this.allCharacters = []
+    for(let i=0; i < array.length ; i++){
+      if(i < this.page * 10 && i >= (this.page - 1) * 10){
+        this.allCharacters.push(array[i])
       }
     }
   }
 
   nextpage(){
     this.page++ 
-    this.atualizar()
+    this.update(this.data)
   }
 
   lastpage(){
     this.page--
-    this.atualizar()
+    this.update(this.data)
   }
 }
