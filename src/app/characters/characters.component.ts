@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
 import { CharactersApiService } from './character/shared/characters-api.service';
-import { map } from 'rxjs/operators';
+import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { map } from 'rxjs/operators';
+
 
 @Component({
   selector: 'app-characters',
@@ -26,16 +27,15 @@ export class CharactersComponent implements OnInit {
   ngOnInit() {
     this.CharacterSvc.get().pipe(map((data: any) => data.data.results
     )).subscribe(dados => {
+      this.values = dados
       for(let i=0; i < dados.length; i++){
         this.data.push(dados[i])
       }
       this.update(this.data)
     })
-
-
   }
 
-  onKey(event: any) { 
+  onKey(event: any){ 
     this.allCharacters = []
     this.data = []
     this.values = event.target.value;
@@ -56,11 +56,13 @@ export class CharactersComponent implements OnInit {
 
   update(array: any){
     this.allCharacters = []
+    
     for(let i=0; i < array.length ; i++){
       if(i < this.page * 10 && i >= (this.page - 1) * 10){
         this.allCharacters.push(array[i])
       }
     }
+    console.log(this.allCharacters)
   }
 
   nextpage(){
