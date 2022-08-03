@@ -1,7 +1,7 @@
 import { CharactersApiService } from './character/shared/characters-api.service';
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { map, max } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 
 
 @Component({
@@ -51,6 +51,7 @@ export class CharactersComponent implements OnInit {
         this.data.push(element)
       }
 
+      this.maxpage = this.data.length/10
       this.update(this.data)
     })
   }
@@ -69,7 +70,6 @@ export class CharactersComponent implements OnInit {
 
 
   nextpage(){
-    if((this.data.length/10) < this.page++)
     this.page++ 
     this.update(this.data)
   }
