@@ -34,8 +34,8 @@
 
     <mat-toolbar color="primary" style="height: 100px;">
       
-      <mat-icon (click)="lastpage()">chevron_left</mat-icon>
-      <mat-icon (click)="nextpage()">chevron_right</mat-icon>
+      <mat-icon (click)="lastpage()" *ngIf="page > 1">chevron_left</mat-icon>
+      <mat-icon (click)="nextpage()" *ngIf="maxpage > page">chevron_right</mat-icon>
     </mat-toolbar>
 
   </mat-sidenav-content>
