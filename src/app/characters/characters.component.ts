@@ -29,14 +29,12 @@ export class CharactersComponent implements OnInit {
     this.CharacterSvc.get().pipe(map((data: any) => data.data.results
     )).subscribe(dados => {
       this.personagens = dados
-      this.values = dados
-      for(let i=0; i < dados.length; i++){
-        this.data.push(dados[i])
-      }
-      this.maxpage = this.data.length/10
-      this.update(this.data)
+
+      this.maxpage = this.personagens.length/10
+      this.update(this.personagens)
     })
   }
+
 
   onKey(event: any){ 
     this.allCharacters = []

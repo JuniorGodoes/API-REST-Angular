@@ -11,7 +11,7 @@ export class CharactersApiService {
 
   constructor(private http: HttpClient) { }
 
-    get () {
+    get() {
       return this.http.get(this.Url_Api)
     }
 }
