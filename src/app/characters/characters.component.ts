@@ -29,6 +29,7 @@ export class CharactersComponent implements OnInit {
     this.CharacterSvc.get().pipe(map((data: any) => data.data.results
     )).subscribe(dados => {
       this.personagens = dados
+      this.data = this.personagens
 
       this.maxpage = this.personagens.length/10
       this.update(this.personagens)
